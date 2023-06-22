@@ -1,0 +1,95 @@
+************************************************************************
+* auCdl Netlist:
+* 
+* Library Name:  Final
+* Top Cell Name: Final2
+* View Name:     schematic
+* Netlisted on:  Jun 18 10:31:37 2022
+************************************************************************
+
+*.BIPOLAR
+*.RESI = 2000 
+*.RESVAL
+*.CAPVAL
+*.DIOPERI
+*.DIOAREA
+*.EQUATION
+*.SCALE METER
+*.MEGA
+*.PARAM
+
+*.GLOBAL gnd!
+
+*.PIN gnd!
+
+************************************************************************
+* Library Name: Final
+* Cell Name:    Final2
+* View Name:    schematic
+************************************************************************
+
+.subckt AICopamp iref vdd vinn vinp vocm von vop vss
+*.PININFO vdd:I vss:I vinn:I vinp:I vocm:I von:P vop:O
+
+************************************************************************
+RR1 net165 vop 50K $[RP]
+RR0 net140 vocm 8K $[RP]
+RR2 net165 von 50K $[RP]
+CC0 net92 net153 15p $[CP]
+CC3 net158 net51 15p $[CP]
+CC2 net158 von 2.5p $[CP]
+CC1 net92 vop 2.5p $[CP]
+
+MMb1 vb2 iref vss vss N_18 W=1.2u L=1u m=200
+MMb3 vb1 iref vss vss N_18 W=1.2u L=1u m=200
+MMb2 vb1 vb1 vdd vdd P_18 W=1u   L=1u m=30
+MMb4 iref iref vss vss N_18 W=1.2u L=1u m=40
+MMb0 vb2 vb2 vdd vdd P_18 W=1u   L=1u m=43
+
+MM11 net12 iref vss vss         N_18    W=1u  L=1u     m=200
+MM12 net76 vinn net12 vss      N_18    W=1u  L=0.55u   m=100
+MM13 net13 vinp net12 vss      N_18    W=1u  L=0.55u   m=100
+MM14l net76 vcmc vdd vdd       P_18    W=1u  L=1u     m=90
+MM14r net13 vcmc vdd vdd       P_18    W=1u  L=1u     m=90
+MM15l net47 vb1 net76 net76    P_18    W=1u  L=1u     m=140
+MM15r net25 vb1 net13 net13    P_18    W=1u  L=1u     m=140
+MM16l net47 iref vss vss        N_18    W=1.2u L=1u    m=90
+MM16r net25 iref vss vss        N_18    W=1.2u L=1u    m=90
+
+
+MMc1l net158 vb2 vdd vdd       P_18    W=1u    L=1u     m=13
+MMc1r net92 vb2 vdd vdd        P_18    W=1u    L=1u     m=13
+MMc2l net47 gnd! net158 vdd    P_18    W=1.2u  L=0.8u   m=20
+MMc2r net25 gnd! net92 vdd     P_18    W=1.2u  L=0.8u   m=20
+MMc3l net47 iref vss vss        N_18    W=2.4u  L=1u     m=30
+MMc3r net25 iref vss vss        N_18    W=2.4u  L=1u     m=30
+
+
+MM21l net51 vb2 vdd vdd        P_18    W=1.2u   L=0.8u   m=5
+MM21r net153 vb2 vdd vdd       P_18    W=1.2u   L=0.8u   m=5
+MM22l net51 net47 vss vss      N_18    W=2u   L=1u     m=50
+MM22r net153 net25 vss vss     N_18    W=2u   L=1u     m=50
+
+
+MM31l net111 net111 vdd vdd    P_18    W=1.2u    L=0.8u  m=40
+MM31r net41 net41 vdd vdd      P_18    W=1.2u    L=0.8u  m=40
+MM32l net111 net51 vss vss     N_18    W=2u      L=2u    m=10
+MM32r net41 net153 vss vss     N_18    W=2u      L=2u    m=10
+MM33l Von net111 vdd vdd       P_18    W=1.2u    L=0.8u  m=100
+MM33r Vop net41 vdd vdd        P_18    W=1.2u    L=0.8u  m=100
+MM34l Von net47 vss vss        N_18    W=2u      L=1u    m=100
+MM34r Vop net25 vss vss        N_18    W=2u      L=1u    m=100
+
+MM1 net165 net69 vdd vdd       P_18    W=2u    L=0.8u m=4
+MM2 net69 vb1 net165 vdd       P_18    W=2u    L=0.8u m=4
+MM3 net69 iref vss vss          N_18    W=1.2u  L=1u  m=8
+MM4 net140 net69 vdd vdd       P_18    W=2u    L=0.8u  m=4
+MM5 Vcmc vb1 net140 net140     P_18    W=2u    L=0.8u  m=4
+MM6 Vcmc iref vss vss           N_18    W=1.2u  L=1u  m=8
+MM7 net132 vcmc vdd vdd        P_18    W=0.8u  L=0.8u  m=15
+MM8 Vcmc vb1 net132 net132     P_18    W=1.1u  L=0.8u  m=15
+MM9 Vcmc iref vss vss           N_18    W=1.2u  L=1u  m=20
+
+
+.ENDS
+
